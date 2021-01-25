@@ -1,0 +1,11 @@
+[package]
+name = "pseudo-cyrillic"
+version = "0.1.0"
+authors = ["Andrey Vikulov <avikuloff@yandex.ru>"]
+license = "MIT OR Apache-2.0"
+description = "Faux Russian typography"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
