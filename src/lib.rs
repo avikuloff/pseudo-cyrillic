@@ -100,11 +100,10 @@ mod tests {
     use super::*;
 
     #[test]
-    #[ignore]
     fn test_convert() {
         assert_eq!(convert(
-            "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"),
-                   "a6BrDeezh3uukJIMHonpcmyqpxu4LLILLjbbIb3IORA6BrDEEZH3uuKJIMHOnPCTYqpXU4LLILLjbbIb3IOR"
+            "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ A1"),
+                   "a6BrDeezh3uukJIMHonpcmyqpxu4LLILLjbbIb3IORA6BrDEEZH3uuKJIMHOnPCTYqpXU4LLILLjbbIb3IOR A1"
         );
     }
 
