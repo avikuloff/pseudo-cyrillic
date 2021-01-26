@@ -5,6 +5,12 @@ Faux Russian typography / Фальшивая русская типографик
 которая преобразует буквы русского алфавита в строке, 
 в похожие по начертанию символы латиницы и цифры.
 
+## Usage
+Add dependency to your Cargo.toml
+```toml
+pseudo-cyrillic = "0.1"
+```
+
 ## Examples
 ```rust
 assert_eq!(convert("Дровосек"), "DpoBocek");
