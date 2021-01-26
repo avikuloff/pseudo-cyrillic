@@ -5,15 +5,12 @@
 /// ```
 /// # use pseudo_cyrillic::convert;
 ///
-/// let nickname = "Воин Света".to_owned();
-///
-/// assert_eq!(convert(nickname), "BouH CBema");
+/// assert_eq!(convert("Воин Света"), "BouH CBema");
 /// ```
-pub fn convert(original: String) -> String {
-    let chars: Vec<char> = original.chars().collect();
-    let mut result_string = String::new();
+pub fn convert(original: &str) -> String {
+    let mut new_string = String::with_capacity(original.len());
 
-    for ch in chars.into_iter() {
+    for ch in original.chars() {
         let analog = match ch {
             // Строчные буквы
             'а' => "a",
@@ -85,359 +82,360 @@ pub fn convert(original: String) -> String {
             'Я' => "R",
             // Остальные символы оставляем без изменений
             _ => {
-                result_string.push(ch);
+                new_string.push(ch);
                 continue
             }
         };
 
-        result_string.push_str(analog);
+        new_string.push_str(analog);
     }
 
-    result_string
+    new_string
 }
 
 #[cfg(test)]
 mod tests {
     #![allow(non_snake_case)]
+
     use super::*;
 
     #[test]
     #[ignore]
     fn test_convert() {
         assert_eq!(convert(
-            "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".to_owned()),
+            "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"),
                    "a6BrDeezh3uukJIMHonpcmyqpxu4LLILLjbbIb3IORA6BrDEEZH3uuKJIMHOnPCTYqpXU4LLILLjbbIb3IOR"
         );
     }
 
     #[test]
     fn test_a() {
-        assert_eq!(convert("а".to_owned()), "a");
+        assert_eq!(convert("а"), "a");
     }
 
     #[test]
     fn test_b() {
-        assert_eq!(convert("б".to_owned()), "6");
+        assert_eq!(convert("б"), "6");
     }
 
     #[test]
     fn test_v() {
-        assert_eq!(convert("в".to_owned()), "B");
+        assert_eq!(convert("в"), "B");
     }
 
     #[test]
     fn test_g() {
-        assert_eq!(convert("г".to_owned()), "r");
+        assert_eq!(convert("г"), "r");
     }
 
     #[test]
     fn test_d() {
-        assert_eq!(convert("д".to_owned()), "D");
+        assert_eq!(convert("д"), "D");
     }
 
     #[test]
     fn test_e() {
-        assert_eq!(convert("е".to_owned()), "e");
+        assert_eq!(convert("е"), "e");
     }
 
     #[test]
     fn test_yo() {
-        assert_eq!(convert("ё".to_owned()), "e");
+        assert_eq!(convert("ё"), "e");
     }
 
     #[test]
     fn test_zh() {
-        assert_eq!(convert("ж".to_owned()), "zh");
+        assert_eq!(convert("ж"), "zh");
     }
 
     #[test]
     fn test_z() {
-        assert_eq!(convert("з".to_owned()), "3");
+        assert_eq!(convert("з"), "3");
     }
 
     #[test]
     fn test_i() {
-        assert_eq!(convert("и".to_owned()), "u");
+        assert_eq!(convert("и"), "u");
     }
 
     #[test]
     fn test_j() {
-        assert_eq!(convert("й".to_owned()), "u");
+        assert_eq!(convert("й"), "u");
     }
 
     #[test]
     fn test_k() {
-        assert_eq!(convert("к".to_owned()), "k");
+        assert_eq!(convert("к"), "k");
     }
 
     #[test]
     fn test_l() {
-        assert_eq!(convert("л".to_owned()), "JI");
+        assert_eq!(convert("л"), "JI");
     }
 
     #[test]
     fn test_m() {
-        assert_eq!(convert("м".to_owned()), "M");
+        assert_eq!(convert("м"), "M");
     }
 
     #[test]
     fn test_n() {
-        assert_eq!(convert("н".to_owned()), "H");
+        assert_eq!(convert("н"), "H");
     }
 
     #[test]
     fn test_o() {
-        assert_eq!(convert("о".to_owned()), "o");
+        assert_eq!(convert("о"), "o");
     }
 
     #[test]
     fn test_p() {
-        assert_eq!(convert("п".to_owned()), "n");
+        assert_eq!(convert("п"), "n");
     }
 
     #[test]
     fn test_r() {
-        assert_eq!(convert("р".to_owned()), "p");
+        assert_eq!(convert("р"), "p");
     }
 
     #[test]
     fn test_s() {
-        assert_eq!(convert("с".to_owned()), "c");
+        assert_eq!(convert("с"), "c");
     }
 
     #[test]
     fn test_t() {
-        assert_eq!(convert("т".to_owned()), "m");
+        assert_eq!(convert("т"), "m");
     }
 
     #[test]
     fn test_u() {
-        assert_eq!(convert("у".to_owned()), "y");
+        assert_eq!(convert("у"), "y");
     }
 
     #[test]
     fn test_f() {
-        assert_eq!(convert("ф".to_owned()), "qp");
+        assert_eq!(convert("ф"), "qp");
     }
 
     #[test]
     fn test_x() {
-        assert_eq!(convert("х".to_owned()), "x");
+        assert_eq!(convert("х"), "x");
     }
 
     #[test]
     fn test_c() {
-        assert_eq!(convert("ц".to_owned()), "u");
+        assert_eq!(convert("ц"), "u");
     }
 
     #[test]
     fn test_ch() {
-        assert_eq!(convert("ч".to_owned()), "4");
+        assert_eq!(convert("ч"), "4");
     }
 
     #[test]
     fn test_sh() {
-        assert_eq!(convert("ш".to_owned()), "LLI");
+        assert_eq!(convert("ш"), "LLI");
     }
 
     #[test]
     fn test_shh() {
-        assert_eq!(convert("щ".to_owned()), "LLj");
+        assert_eq!(convert("щ"), "LLj");
     }
 
     #[test]
 
     fn test_tverdyi_znak() {
-        assert_eq!(convert("ъ".to_owned()), "b");
+        assert_eq!(convert("ъ"), "b");
     }
 
     #[test]
     fn test_yy() {
-        assert_eq!(convert("ы".to_owned()), "bI");
+        assert_eq!(convert("ы"), "bI");
     }
 
     #[test]
     fn test_myagkiy_znak() {
-        assert_eq!(convert("ь".to_owned()), "b");
+        assert_eq!(convert("ь"), "b");
     }
 
     #[test]
     fn test_ee() {
-        assert_eq!(convert("э".to_owned()), "3");
+        assert_eq!(convert("э"), "3");
     }
 
     #[test]
     fn test_yu() {
-        assert_eq!(convert("ю".to_owned()), "IO");
+        assert_eq!(convert("ю"), "IO");
     }
 
     #[test]
     fn test_ya() {
-        assert_eq!(convert("я".to_owned()), "R");
+        assert_eq!(convert("я"), "R");
     }
 
     #[test]
     fn test_A() {
-        assert_eq!(convert("А".to_owned()), "A");
+        assert_eq!(convert("А"), "A");
     }
 
     #[test]
     fn test_B() {
-        assert_eq!(convert("Б".to_owned()), "6");
+        assert_eq!(convert("Б"), "6");
     }
 
     #[test]
     fn test_V() {
-        assert_eq!(convert("В".to_owned()), "B");
+        assert_eq!(convert("В"), "B");
     }
 
     #[test]
     fn test_G() {
-        assert_eq!(convert("Г".to_owned()), "r");
+        assert_eq!(convert("Г"), "r");
     }
 
     #[test]
     fn test_D() {
-        assert_eq!(convert("Д".to_owned()), "D");
+        assert_eq!(convert("Д"), "D");
     }
 
     #[test]
     fn test_E() {
-        assert_eq!(convert("Е".to_owned()), "E");
+        assert_eq!(convert("Е"), "E");
     }
 
     #[test]
     fn test_Yo() {
-        assert_eq!(convert("Ё".to_owned()), "E");
+        assert_eq!(convert("Ё"), "E");
     }
 
     #[test]
     fn test_Zh() {
-        assert_eq!(convert("Ж".to_owned()), "ZH");
+        assert_eq!(convert("Ж"), "ZH");
     }
 
     #[test]
     fn test_Z() {
-        assert_eq!(convert("З".to_owned()), "3");
+        assert_eq!(convert("З"), "3");
     }
 
     #[test]
     fn test_I() {
-        assert_eq!(convert("И".to_owned()), "u");
+        assert_eq!(convert("И"), "u");
     }
 
     #[test]
     fn test_J() {
-        assert_eq!(convert("Й".to_owned()), "u");
+        assert_eq!(convert("Й"), "u");
     }
 
     #[test]
     fn test_K() {
-        assert_eq!(convert("К".to_owned()), "K");
+        assert_eq!(convert("К"), "K");
     }
 
     #[test]
     fn test_L() {
-        assert_eq!(convert("Л".to_owned()), "JI");
+        assert_eq!(convert("Л"), "JI");
     }
 
     #[test]
     fn test_M() {
-        assert_eq!(convert("М".to_owned()), "M");
+        assert_eq!(convert("М"), "M");
     }
 
     #[test]
     fn test_N() {
-        assert_eq!(convert("Н".to_owned()), "H");
+        assert_eq!(convert("Н"), "H");
     }
 
     #[test]
     fn test_O() {
-        assert_eq!(convert("О".to_owned()), "O");
+        assert_eq!(convert("О"), "O");
     }
 
     #[test]
     fn test_P() {
-        assert_eq!(convert("П".to_owned()), "n");
+        assert_eq!(convert("П"), "n");
     }
 
     #[test]
     fn test_R() {
-        assert_eq!(convert("Р".to_owned()), "P");
+        assert_eq!(convert("Р"), "P");
     }
 
     #[test]
     fn test_S() {
-        assert_eq!(convert("С".to_owned()), "C");
+        assert_eq!(convert("С"), "C");
     }
 
     #[test]
     fn test_T() {
-        assert_eq!(convert("Т".to_owned()), "T");
+        assert_eq!(convert("Т"), "T");
     }
 
     #[test]
     fn test_U() {
-        assert_eq!(convert("У".to_owned()), "Y");
+        assert_eq!(convert("У"), "Y");
     }
 
     #[test]
     fn test_F() {
-        assert_eq!(convert("Ф".to_owned()), "qp");
+        assert_eq!(convert("Ф"), "qp");
     }
 
     #[test]
     fn test_X() {
-        assert_eq!(convert("Х".to_owned()), "X");
+        assert_eq!(convert("Х"), "X");
     }
 
     #[test]
     fn test_C() {
-        assert_eq!(convert("Ц".to_owned()), "U");
+        assert_eq!(convert("Ц"), "U");
     }
 
     #[test]
     fn test_Ch() {
-        assert_eq!(convert("Ч".to_owned()), "4");
+        assert_eq!(convert("Ч"), "4");
     }
 
     #[test]
     fn test_Sh() {
-        assert_eq!(convert("Ш".to_owned()), "LLI");
+        assert_eq!(convert("Ш"), "LLI");
     }
 
     #[test]
     fn test_Shh() {
-        assert_eq!(convert("Щ".to_owned()), "LLj");
+        assert_eq!(convert("Щ"), "LLj");
     }
 
     #[test]
     fn test_Tverdiy_znak() {
-        assert_eq!(convert("Ъ".to_owned()), "b");
+        assert_eq!(convert("Ъ"), "b");
     }
 
     #[test]
     fn test_YY() {
-        assert_eq!(convert("Ы".to_owned()), "bI");
+        assert_eq!(convert("Ы"), "bI");
     }
 
     #[test]
     fn test_Myagkiy_znak() {
-        assert_eq!(convert("Ь".to_owned()), "b");
+        assert_eq!(convert("Ь"), "b");
     }
 
     #[test]
     fn test_Ee() {
-        assert_eq!(convert("Э".to_owned()), "3");
+        assert_eq!(convert("Э"), "3");
     }
 
     #[test]
     fn test_Yu() {
-        assert_eq!(convert("Ю".to_owned()), "IO");
+        assert_eq!(convert("Ю"), "IO");
     }
 
     #[test]
     fn test_Ya() {
-        assert_eq!(convert("Я".to_owned()), "R");
+        assert_eq!(convert("Я"), "R");
     }
 }

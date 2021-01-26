@@ -7,9 +7,9 @@ Faux Russian typography / Фальшивая русская типографик
 
 ## Examples
 ```rust
-assert_eq!(convert("Дровосек".to_owned()), "DpoBocek");
-assert_eq!(convert("Воин Света".to_owned()), "BouH CBema");
-assert_eq!(convert("Князь Тьмы".to_owned()), "KHR3b TbMbI");
+assert_eq!(convert("Дровосек"), "DpoBocek");
+assert_eq!(convert("Воин Света"), "BouH CBema");
+assert_eq!(convert("Князь Тьмы"), "KHR3b TbMbI");
 ```
 
 ## Таблица соответствия
